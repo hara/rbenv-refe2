@@ -3,6 +3,8 @@ rbenv-refe2
 This [rbenv](https://github.com/sstephenson/rbenv) plugin helps you to refer to
 Rurema (Japanese Ruby reference manual) of the current Ruby version.
 
+This plugin supports only CRuby.
+
 Dependencies
 ------------
 * refe2 >= 0.7.0
