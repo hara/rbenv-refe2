@@ -16,7 +16,7 @@ if [[ $(rbenv-version-name) =~ ^[1-9]\.[0-9]\.[0-9] ]] ; then
     echo "Cannot read ${config}" >&2
     exit 1
   fi
-  database_prefix=$(grep '^:database_prefix: ' ~/.bitclust/config | sed -e 's/:database_prefix:[[:space:]]\+//' )
+  database_prefix=$(grep '^:database_prefix: ' ~/.bitclust/config | sed -e 's/:database_prefix:[[:space:]]*//')
   if [ -z ${database_prefix} ] ; then
     echo "Cannot load :database_prefix"
     exit 1
