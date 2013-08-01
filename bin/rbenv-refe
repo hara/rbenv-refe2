@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+#
+# Summary: Execute refe with the database of the current Ruby version
+#
+# Usage: rbenv refe [--optional-flag] <required-argument>
+#
+set -e
+[ -n "$RBENV_DEBUG" ] && set -x
+
+config=~/.bitclust/config
+
+if [[ $(rbenv-version-name) =~ ^[1-9]\.[0-9]\.[0-9] ]] ; then
+  database_suffix=${BASH_REMATCH[0]}
+
+  if [ ! -r ${config} ] ; then
+    echo "Cannot read ${config}" >&2
+    exit 1
+  fi
+  database_prefix=$(grep '^:database_prefix: ' ~/.bitclust/config | sed -e 's/:database_prefix:[[:space:]]\+//' )
+  if [ -z ${database_prefix} ] ; then
+    echo "Cannot load :database_prefix"
+    exit 1
+  fi
+
+  exec refe -d "${database_prefix}-${database_suffix}" "$@"
+fi
+
